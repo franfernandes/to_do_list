@@ -7,8 +7,8 @@ from django.utils import timezone
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
 from .serializers import TaskSerializer
+from drf_yasg import openapi
 
 # Listar todas as tarefas
 @cache_page(60)
@@ -79,11 +79,15 @@ def atualizar_status(request, task_id):
 
 # Deletar tarefa
 @swagger_auto_schema(
-    methods=['post'],
-    operation_summary="Deleta uma tarefa",
-    responses={302: 'Redirect', 404: 'Not Found'}
+    methods=['get', 'post'],
+    operation_summary="Confirmação de exclusão de tarefa",
+    responses={
+        302: openapi.Response("Redirect", schema=openapi.Schema(type=openapi.TYPE_STRING)),
+        404: openapi.Response("Not Found", schema=openapi.Schema(type=openapi.TYPE_STRING)),
+    },
 )
-@api_view(['POST'])
+@cache_page(60)
+@api_view(['GET', 'POST'])
 @permission_classes([AllowAny])
 def deletar_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
@@ -93,4 +97,5 @@ def deletar_task(request, task_id):
         cache.clear()
         return redirect('lista_tasks')
 
-    return render(request, 'confirma_delete.html', {'task': task})
+    else:
+        return render(request, 'confirma_delete.html', {'task': task})

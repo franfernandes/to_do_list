@@ -14,10 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,re_path, include
 from app.views import listar_tasks, criar_task,detalhe_task, atualizar_status, deletar_task
-from django.conf import settings
-from django.conf.urls.static import static
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
@@ -43,5 +40,6 @@ urlpatterns = [
     path('tasks/<int:task_id>/delete/', deletar_task, name='deletar_task'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Alternativa de interface de OPEN API
-    
+
+
 ]
