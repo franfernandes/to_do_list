@@ -3,6 +3,7 @@ from .models import Task
 from .forms import TaskForm
 from django.views.decorators.cache import cache_page
 from django.core.cache import cache
+from django.utils import timezone 
 
 # Listar todas as tarefas
 @cache_page(60)
@@ -37,9 +38,8 @@ def atualizar_status(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 
     if request.method == 'POST':
-        print(task.status)
         task.status = not task.status
-        print(task.status)
+        task.data_atualizacao = timezone.now()
         task.save()
     return redirect('lista_tasks')
 
