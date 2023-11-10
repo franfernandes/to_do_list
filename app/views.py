@@ -16,12 +16,14 @@ def criar_task(request):
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.save()
             cache.clear()
             return redirect('lista_tasks')
     else:
         form = TaskForm()
     return render(request, 'criar_tarefa.html', {'form': form})
+
 
 # Exibir detalhes da tarefa
 @cache_page(60)
