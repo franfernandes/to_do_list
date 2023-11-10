@@ -40,7 +40,7 @@ def atualizar_status(request, task_id):
 
     return redirect('detalhe_task', task_id=task.id)
 
-#Deletar tarefa
+# Deletar tarefa
 def deletar_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 

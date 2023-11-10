@@ -5,7 +5,6 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['titulo', 'descricao', 'status']
-
         labels = {'titulo': 'Titulo da Tarefa',
                   'descricao':'Descrição da tarefa'}
         widgets = {
