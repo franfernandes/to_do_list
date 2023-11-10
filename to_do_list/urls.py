@@ -14,9 +14,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,re_path, include
 from app.views import listar_tasks, criar_task,detalhe_task, atualizar_status, deletar_task
+from django.conf import settings
+from django.conf.urls.static import static
+from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
+schema_view = get_schema_view(
+    openapi.Info(
+        title="API TO-DO",
+        default_version='v1',
+        description="API De lista de tarefas",
+        contact=openapi.Contact(email="ffrodrigues@inf.ufrgs.br"),
+        license=openapi.License(name="Francielle Fernandes Rodrigues"),
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +41,7 @@ urlpatterns = [
     path('tasks/<int:task_id>/', detalhe_task, name='detalhe_task'),
     path('tasks/<int:task_id>/update/', atualizar_status, name='atualizar_status'),
     path('tasks/<int:task_id>/delete/', deletar_task, name='deletar_task'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Adicione isso para a interface ReDoc
+    
 ]
