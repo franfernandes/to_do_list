@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmar Exclusão da Tarefa</title>
+</head>
+<body>
+    <h1>Confirmar Exclusão da Tarefa</h1>
+    <p>Você está prestes a excluir a tarefa:</p>
+    <ul>
+        <li>
+            <strong>Título:</strong> {{ task.titulo }}
+        </li>
+        <li>
+            <strong>Descrição:</strong> {{ task.descricao }}
+        </li>
+        <li>
+            <strong>Criada em:</strong> {{ task.data_criacao }}
+        </li>
+        <li>
+            <strong>Atualizada em:</strong> {{ task.data_atualizacao }}
+        </li>
+        <li>
+            <strong>Status:</strong> {% if task.status %}Concluída{% else %}Pendente{% endif %}
+        </li>
+    </ul>
+
+    <form method="post">
+        {% csrf_token %}
+        <input type="submit" value="Confirmar Exclusão">
+        <a href="{% url 'detalhe_task' task.id %}">Cancelar</a>
+    </form>
+</body>
+</html>

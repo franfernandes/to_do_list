@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lista de Tarefas</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0; 
+        display: flex;
+        justify-content: center;
+        align-items: center; 
+        height: 100vh;
+        margin: 0;
+      }
+      .task-container {
+        max-width: 600px; 
+        background-color: #333;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); 
+      }
+      h1 {
+        text-align: center;
+        color: #fff; 
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        background-color: #a18b8b; 
+        border: 1px solid #333; 
+        margin: 10px 0;
+        padding: 10px;
+        border-radius: 5px;
+        color: #fff; 
+      }
+      p {
+        margin: 5px 0;
+      }
+      a {
+        color: #241d2e;
+      }
+      .completed {
+        background-color: #5d975d; 
+        border: 1px solid #3a733a; 
+      }
+    </style>
+  </head>
+  <body>
+    <div class="task-container">
+      <h1>Lista de Tarefas</h1>
+      <form action="create/" method="post">
+        {% csrf_token %}
+        <input type="submit" value="Adicionar Tarefa" />
+      </form>
+      <ul>
+        {% for task in tasks %}
+        <li class="{% if task.status %}completed{% endif %}">
+          <a href="{% url 'detalhe_task' task.id %}">{{ task.titulo }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>

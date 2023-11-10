@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes da Tarefa</title>
+    <style>
+        .delete-button {
+            background-color: #ff5555; 
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Detalhes da Tarefa</h1>
+    <ul>
+        <li>
+            <strong>Título:</strong> {{ task.titulo }}
+        </li>
+        <li>
+            <strong>Descrição:</strong> {{ task.descricao }}
+        </li>
+        <li>
+            <strong>Criada em:</strong> {{ task.data_criacao }}
+        </li>
+        <li>
+            <strong>Atualizada em:</strong> {{ task.data_atualizacao }}
+        </li>
+        <li>
+            <strong>Status:</strong> {% if task.status %}Concluída{% else %}Pendente{% endif %}
+            <a href="{% url 'atualizar_status' task.id %}" class="update-button">Alterar status</a>
+        </li>
+        <form method="post" action="{% url 'deletar_task' task.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-button">Excluir tarefa</button>
+            </form>
+    </ul>
+    
+    <a href="{% url 'lista_tasks' %}">Voltar para a lista de tarefas</a>
+</body>
+</html>
