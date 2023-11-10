@@ -26,12 +26,13 @@
       form {
         text-align: center;
       }
-      form input[type="text"] {
-        width: 100%;
+      form input[type="text"], form input[type="checkbox"] {
+        width: calc(100% - 22px); 
         padding: 10px;
         margin: 10px 0;
         border: 1px solid #333;
         border-radius: 5px;
+        box-sizing: border-box; 
       }
       form input[type="submit"] {
         background-color: #a18b8b; 
@@ -47,14 +48,13 @@
     <div class="task-container">
       <h1>Adicionar Tarefa</h1>
 
-     <form method="post">
-    {% csrf_token %}
-    {{ form.titulo }}
-    {{ form.descricao }}
-    {{ form.status }}
-    <input type="submit" value="Adicionar Tarefa" />
-</form>
-
+      <form method="post">
+        {% csrf_token %}
+        {{ form.titulo }}
+        {{ form.descricao }}
+        {{ form.status }} 
+        <input type="submit" value="Adicionar Tarefa" />
+      </form>
     </div>
   </body>
 </html>
