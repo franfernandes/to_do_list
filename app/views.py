@@ -45,8 +45,15 @@ def criar_task(request):
         form = TaskForm()
     return render(request, 'criar_tarefa.html', {'form': form})
 
-
 # Exibir detalhes da tarefa
+@cache_page(60)
+@swagger_auto_schema(
+    methods=['get'],
+    operation_summary="Exibe detalhes de uma tarefa",
+    responses={200: 'OK', 404: 'Not Found'}
+)
+@api_view(['GET'])
+@permission_classes([AllowAny])
 @cache_page(60)
 def detalhe_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
@@ -54,6 +61,13 @@ def detalhe_task(request, task_id):
     return render(request, 'detalhes_task.html', {'task': task})
 
 # Atualizar status da tarefa
+@swagger_auto_schema(
+    methods=['post'],
+    operation_summary="Atualiza o status de uma tarefa",
+    responses={302: 'Redirect', 404: 'Not Found'}
+)
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def atualizar_status(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 
@@ -64,6 +78,13 @@ def atualizar_status(request, task_id):
     return redirect('lista_tasks')
 
 # Deletar tarefa
+@swagger_auto_schema(
+    methods=['post'],
+    operation_summary="Deleta uma tarefa",
+    responses={302: 'Redirect', 404: 'Not Found'}
+)
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def deletar_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 

@@ -42,6 +42,6 @@ urlpatterns = [
     path('tasks/<int:task_id>/update/', atualizar_status, name='atualizar_status'),
     path('tasks/<int:task_id>/delete/', deletar_task, name='deletar_task'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
-    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Adicione isso para a interface ReDoc
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),  # Alternativa de interface de OPEN API
     
 ]
