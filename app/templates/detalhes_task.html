@@ -61,7 +61,10 @@
             </li>
             <li>
                 <strong>Status:</strong> {% if task.status %}Concluída{% else %}Pendente{% endif %}
-                <a href="{% url 'atualizar_status' task.id %}" class="update-button">Alterar status</a>
+            <form method="post" action="{% url 'atualizar_status' task.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="update-button">Alterar status</button>
+            </form>
             </li>
             <form method="get" action="{% url 'deletar_task' task.id %}" style="display: inline;">
                 {% csrf_token %}

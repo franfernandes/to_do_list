@@ -27,6 +27,7 @@ def criar_task(request):
 @cache_page(60)
 def detalhe_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
+    cache.clear()
     return render(request, 'detalhes_task.html', {'task': task})
 
 # Atualizar status da tarefa
@@ -34,11 +35,11 @@ def atualizar_status(request, task_id):
     task = get_object_or_404(Task, id=task_id)
 
     if request.method == 'POST':
+        print(task.status)
         task.status = not task.status
+        print(task.status)
         task.save()
-        cache.clear()
-
-    return redirect('detalhe_task', task_id=task.id)
+    return redirect('lista_tasks')
 
 # Deletar tarefa
 def deletar_task(request, task_id):
