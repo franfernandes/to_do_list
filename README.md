@@ -13,8 +13,8 @@ Este é um aplicativo web simples para gerenciar tarefas. Ele permite que os usu
 ## Instalação
 1. Clone o repositório: `git clone https://github.com/franfernandes/to_do_list.git`
 2. Instale as dependências: `pip install -r requirements.txt`
-3. Execute as migrações do banco de dados: `python manage.py migrate`
-4. Inicie o servidor local: `python manage.py runserver`
+3. Execute as migrações do banco de dados: `python3 manage.py migrate`
+4. Inicie o servidor local: `python3 manage.py runserver`
 
 ## Como Usar
 1. Acesse a aplicação em http://localhost:8000/tasks/
