@@ -21,6 +21,9 @@ Este é um aplicativo web simples para gerenciar tarefas. Ele permite que os usu
 2. Crie uma nova tarefa.
 3. Visualize, atualize ou exclua tarefas conforme necessário.
 
+## Rodando Testes
+1. Execute os testes : `python3 manage.py test`
+
 ## Open API
 
 A documentação da API está disponível através do Swagger e do Redoc.
